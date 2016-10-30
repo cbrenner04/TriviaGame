@@ -1,0 +1,13 @@
+.push {
+  min-height: 15%; /* for browsers that don't support vh */
+  min-height: 15vh;
+}
+
+.game {
+  min-height: 70%; /* for browsers that don't support vh */
+  min-height: 70vh;
+}
+
+button {
+  min-width: 50%;
+}
