@@ -5,8 +5,7 @@ function renderDom() {
                             // game heading
                             .append($('<h1>').text('So much Trivia!'))
                             // time display
-                            .append($('<p>').text('Time remaining: ')
-                                            .attr('id', 'timer'));
+                            .append($('<p>').attr('id', 'timer'));
   // set up body
   $('body').html(
     // add container to put everything in
@@ -53,10 +52,10 @@ function renderResultsArea() {
     // add question
     .append($('<strong>'))
     // result - to tell the player if they were correct or not
-    .append($('<h3>'))
+    .append($('<div>').addClass('result-message'))
     // tell the player what their answer was
-    .append($('<p>').addClass('your-response').text('Your response was: '))
+    .append($('<p>').addClass('your-response'))
     // and what the correct answer was
-    .append($('<p>').addClass('correct-answer').text('The correct answer was: '))
+    .append($('<p>').addClass('correct-answer'))
   );
 }

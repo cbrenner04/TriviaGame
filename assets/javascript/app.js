@@ -13,6 +13,7 @@ var currentQuestion;
 var correctAnswers = 0;
 var yourResponse = '';
 var responseIsCorrect = false;
+var timeRemaining;
 
 function playGame() {
   // print question text
@@ -30,6 +31,16 @@ function setCurrentQuestion() {
 function printQuestion() {
   // show question area
   $('.question').removeClass('hidden');
+  // hide results area
+  if (!$('.result').hasClass('hidden')) {
+    $('.result').addClass('hidden');
+  }
+  // print starting timer
+  $('#timer').text('Time remaining: 30');
+  // set timer to 30 seconds
+  timeRemaining = 30;
+  // start timer
+  startTimer();
   // set question
   setCurrentQuestion();
   // print the question in the label
@@ -38,6 +49,8 @@ function printQuestion() {
   for (var i = 0; i < 4; i++) {
     $('#response' + i).text(currentQuestion.answers[i]);
   }
+  // increment question counter
+  questionCounter += 1;
 }
 
 function checkCorrectResponse() {
@@ -54,12 +67,14 @@ function checkCorrectResponse() {
 
 function showResultsUponResponse() {
   $('.response').on('click', function() {
+    // print results
     printResults();
-    questionCounter += 1;
   });
 }
 
 function printResults() {
+  // stop timer
+  stopTimer();
   // hide question area
   $('.question').addClass('hidden');
   // show result area
@@ -68,12 +83,41 @@ function printResults() {
   $('strong').text(currentQuestion.question);
   // give feedback on response
   if (responseIsCorrect === true) {
-    $('h3').addClass('text-success').text('Correct!');
+    $('.result-message').html('<h3 class="text-success">Correct!</h3>');
+  } else if (timeRemaining <= 0) {
+    $('.result-message').html('<h3 class="text-warning">Times up!</h3>');
   } else {
-    $('h3').addClass('text-danger').text('Nope!');
+    $('.result-message').html('<h3 class="text-danger">Nope!</h3>');
   }
   // print user response
-  $('.your-response').append(yourResponse);
+  $('.your-response').html('Your response was: ' + yourResponse);
   // print correct response
-  $('.correct-answer').append(currentQuestion.correctAnswer);
+  $('.correct-answer').html(
+    'The correct response is: ' + currentQuestion.correctAnswer
+  );
+}
+
+function startTimer() {
+  // start the timer
+  timer = setInterval(decrement, 1000);
+}
+
+function decrement() {
+  // subtract one from the time remaining
+  timeRemaining--;
+  // print the time remaining to the screen
+  $('#timer').html('Time remaining: ' + timeRemaining);
+  if (timeRemaining <= 0) {
+    printResults();
+  }
+}
+
+function stopTimer() {
+  clearInterval(timer);
+  // after waiting for 5 seconds print new question
+  waitThenPrintNewQuestion();
+}
+
+function waitThenPrintNewQuestion() {
+  setTimeout(printQuestion, 5 * 1000);
 }
