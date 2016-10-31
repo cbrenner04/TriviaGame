@@ -1,4 +1,5 @@
- var questionOne = {
+// trivia questions from http://www.triviacountry.com/M14-Music-Trivia.htm
+var questionOne = {
   question: 'What did "Weird Al" Yankovic call his album that contained a' +
             ' parody of a song from Michael Jackson\'s album BAD?',
   answers: ['Baddest', 'Even Worse', 'Badder', 'Good'],

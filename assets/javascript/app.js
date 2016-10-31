@@ -22,6 +22,8 @@ function playGame() {
   checkCorrectResponse();
   // listen for response
   showResultsUponResponse();
+  // restart game
+  restartGame();
 }
 
 function setCurrentQuestion() {
@@ -119,5 +121,37 @@ function stopTimer() {
 }
 
 function waitThenPrintNewQuestion() {
-  setTimeout(printQuestion, 5 * 1000);
+  if (questionCounter >= objects.length) {
+    setTimeout(checkEndOfGame, 3 * 1000);
+  } else {
+    setTimeout(printQuestion, 3 * 1000);
+  }
+}
+
+function checkEndOfGame() {
+  // hide result
+  $('.result').addClass('hidden');
+  // show game result
+  $('.game-result').removeClass('hidden');
+  // blank out timer
+  $('#timer').html('');
+  // print number correct
+  $('.number-correct').text('You got ' + correctAnswers + ' out of ' +
+                            objects.length + ' questions correct');
+  // show restart button
+  $('.restart').removeClass('hidden');
+}
+
+function restartGame() {
+  $('.restart').on('click', function() {
+    reset();
+    $('.game-result').addClass('hidden');
+    $('.restart').addClass('hidden');
+    printQuestion();
+  });
+}
+
+function reset() {
+  questionCounter = 0;
+  correctAnswers = 0;
 }

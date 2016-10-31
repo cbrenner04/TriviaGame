@@ -20,6 +20,8 @@ function renderDom() {
   renderQuestionArea();
   // render results area
   renderResultsArea();
+  // render game results
+  renderGameResultsArea();
 }
 
 function renderQuestionArea() {
@@ -48,14 +50,29 @@ function renderQuestionArea() {
 function renderResultsArea() {
   // result area
   $('.jumbotron').append(
-   $('<div>').addClass('well well-lg result hidden')
-    // add question
-    .append($('<strong>'))
-    // result - to tell the player if they were correct or not
-    .append($('<div>').addClass('result-message'))
-    // tell the player what their answer was
-    .append($('<p>').addClass('your-response'))
-    // and what the correct answer was
-    .append($('<p>').addClass('correct-answer'))
+    $('<div>').addClass('well well-lg result hidden')
+      // add question
+      .append($('<strong>'))
+      // result - to tell the player if they were correct or not
+      .append($('<div>').addClass('result-message'))
+      // tell the player what their answer was
+      .append($('<p>').addClass('your-response'))
+      // and what the correct answer was
+      .append($('<p>').addClass('correct-answer'))
   );
+}
+
+function renderGameResultsArea() {
+  // game results area
+  $('.jumbotron')
+    .append($('<div>').addClass('well well-lg game-result hidden')
+                      // congratulatory message
+                      .append($('<h3>').addClass('text-success')
+                                       .text('Congratulations! You finished ' +
+                                             'the quiz!'))
+                      // how many the user got correct
+                      .append($('<p>').addClass('number-correct')))
+    // need a restart button
+    .append($('<button>').addClass('btn btn-info restart hidden')
+                         .text('Restart!'));
 }
