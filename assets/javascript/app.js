@@ -52,14 +52,14 @@ function printQuestion() {
     $('#response' + i).text(currentQuestion.answers[i]);
   }
   // increment question counter
-  questionCounter += 1;
+  questionCounter++;
 }
 
 function checkCorrectResponse() {
   $('.response').on('click', function() {
     yourResponse = $(this).text();
     if (yourResponse === currentQuestion.correctAnswer) {
-      correctAnswers += 1;
+      correctAnswers++;
       responseIsCorrect = true;
     } else {
       responseIsCorrect = false;
