@@ -11,7 +11,7 @@ function renderDom() {
     // add container to put everything in
     $('<div>').addClass('container')
               // first a row to push second row down
-              .append($('<div>').addClass('row push'))
+              .append($('<div>').addClass('row push hidden-xs'))
               // second row for all the things
               .append($('<div>').addClass('row').html(jumbotron))
   );
