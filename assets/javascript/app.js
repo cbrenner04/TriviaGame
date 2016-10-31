@@ -91,6 +91,8 @@ function printResults() {
   } else {
     $('.result-message').html('<h3 class="text-danger">Nope!</h3>');
   }
+  // reset responseIsCorrect to false
+  responseIsCorrect = false;
   // print user response
   $('.your-response').html('Your response was: ' + yourResponse);
   // reset your response
