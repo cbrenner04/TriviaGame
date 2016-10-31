@@ -93,6 +93,8 @@ function printResults() {
   }
   // print user response
   $('.your-response').html('Your response was: ' + yourResponse);
+  // reset your response
+  yourResponse = '';
   // print correct response
   $('.correct-answer').html(
     'The correct response is: ' + currentQuestion.correctAnswer
