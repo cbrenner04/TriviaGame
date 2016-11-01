@@ -1,15 +1,12 @@
 .push {
-  min-height: 5%; /* for browsers that don't support vh */
   min-height: 5vh;
 }
 
 .game {
-  min-height: 90%; /* for browsers that don't support vh */
   min-height: 90vh;
 }
 
 .well {
-  min-height: 50%; /* for browsers that don't support vh */
   min-height: 50vh;
 }
 
@@ -19,7 +16,6 @@ button {
 
 @media screen and (max-width: 640px) {
   .game {
-    min-height: 100%; /* for browsers that don't support vh */
     min-height: 100vh;
   }
 }

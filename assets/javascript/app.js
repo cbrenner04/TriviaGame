@@ -8,6 +8,8 @@ $(document).ready(function() {
 });
 
 // variables
+var questionSet = [];
+var totalQuestionSet = [];
 var questionCounter = 0;
 var currentQuestion;
 var correctAnswers = 0;
@@ -16,6 +18,8 @@ var responseIsCorrect = false;
 var timeRemaining;
 
 function playGame() {
+  // set the question set
+  setQuestionSet();
   // print question text
   printQuestion();
   // check response
@@ -26,8 +30,25 @@ function playGame() {
   restartGame();
 }
 
+function setQuestionSet() {
+  for (var i = 0; i < 5;) {
+    // get a random number between 0 and 19
+    var index = Math.floor(Math.random() * 19);
+    // get the question at that index of the objects array
+    var question = objects[index];
+    // if the questionSet does not include this question
+    if (questionSet.indexOf(question) === -1) {
+      // add the question to the questionSet
+      questionSet.push(question);
+      // increment the counter -- here because I only want it to increment
+      // if the questionSet got a new question
+      i++;
+    }
+  }
+}
+
 function setCurrentQuestion() {
-  currentQuestion = objects[questionCounter];
+  currentQuestion = questionSet[questionCounter];
 }
 
 function printQuestion() {
@@ -125,7 +146,7 @@ function stopTimer() {
 }
 
 function waitThenPrintNewQuestion() {
-  if (questionCounter >= objects.length) {
+  if (questionCounter >= questionSet.length) {
     setTimeout(checkEndOfGame, 3 * 1000);
   } else {
     setTimeout(printQuestion, 3 * 1000);
@@ -141,16 +162,22 @@ function checkEndOfGame() {
   $('#timer').html('');
   // print number correct
   $('.number-correct').text('You got ' + correctAnswers + ' out of ' +
-                            objects.length + ' questions correct');
+                            questionSet.length + ' questions correct');
   // show restart button
   $('.restart').removeClass('hidden');
 }
 
 function restartGame() {
   $('.restart').on('click', function() {
+    // reset variables
     reset();
+    // hide game result area
     $('.game-result').addClass('hidden');
+    // restart button
     $('.restart').addClass('hidden');
+    // set the question set
+    setQuestionSet();
+    // print the question
     printQuestion();
   });
 }
@@ -158,4 +185,5 @@ function restartGame() {
 function reset() {
   questionCounter = 0;
   correctAnswers = 0;
+  questionSet = [];
 }
