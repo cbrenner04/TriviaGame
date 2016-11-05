@@ -1,10 +1,10 @@
 // game play
 // wait for document to load
 $(document).ready(function() {
-  // render dom
-  renderDom();
-  // play the damn game
-  playGame();
+  // render start screen
+  renderStartScreen();
+  // start game
+  startGame();
 });
 
 // variables
@@ -16,6 +16,15 @@ var correctAnswers = 0;
 var yourResponse = '';
 var responseIsCorrect = false;
 var timeRemaining;
+
+function startGame() {
+  $('.start-game').on('click', function() {
+    // render dom
+    renderDom();
+    // play the damn game
+    playGame();
+  });
+}
 
 function playGame() {
   // set the question set

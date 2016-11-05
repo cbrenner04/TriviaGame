@@ -1,11 +1,31 @@
+// render the start screen -- only renders when page is loaded
+function renderStartScreen() {
+  // jumbotron for game play -- added to body below
+  var jumbotron = renderJumbotron();
+  // append start button
+  jumbotron.append($('<button>')
+           .addClass('start-game btn btn-info')
+           .text('Start Game!'));
+  renderBody(jumbotron);
+}
+
 // render the base dom
 function renderDom() {
   // jumbotron for game play -- added to body below
-  var jumbotron = $('<div>').addClass('jumbotron text-center game')
-                            // game heading
-                            .append($('<h1>').text('So much Trivia!'))
-                            // time display
-                            .append($('<p>').attr('id', 'timer'));
+  var jumbotron = renderJumbotron();
+  // time display
+  jumbotron.append($('<p>').attr('id', 'timer'));
+  renderBody(jumbotron);
+
+  // render question area
+  renderQuestionArea();
+  // render results area
+  renderResultsArea();
+  // render game results
+  renderGameResultsArea();
+}
+
+function renderBody(jumbotron) {
   // set up body
   $('body').html(
     // add container to put everything in
@@ -15,13 +35,13 @@ function renderDom() {
               // second row for all the things
               .append($('<div>').addClass('row').html(jumbotron))
   );
+}
 
-  // render question area
-  renderQuestionArea();
-  // render results area
-  renderResultsArea();
-  // render game results
-  renderGameResultsArea();
+function renderJumbotron() {
+  var jumbotron = $('<div>').addClass('jumbotron text-center game')
+                            // game heading
+                            .append($('<h1>').text('So much Trivia!'));
+  return jumbotron;
 }
 
 function renderQuestionArea() {
