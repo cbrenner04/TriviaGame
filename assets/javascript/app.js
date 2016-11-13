@@ -44,7 +44,7 @@ function setQuestionSet() {
     // get a random number between 0 and 19
     var index = Math.floor(Math.random() * 19);
     // get the question at that index of the objects array
-    var question = objects[index];
+    var question = trivia.questions[index];
     // if the questionSet does not include this question
     if (questionSet.indexOf(question) === -1) {
       // add the question to the questionSet
